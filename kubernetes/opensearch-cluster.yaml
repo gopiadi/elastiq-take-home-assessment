@@ -1,0 +1,22 @@
+apiVersion: opensearch.opensearch.org/v1
+kind: OpenSearchCluster
+metadata:
+  name: opensearch-cluster
+  namespace: opensearch
+spec:
+  nodes: 3
+  nodePools:
+    - name: opensearch-node-pool
+      replicas: 3
+      resources:
+        limits:
+          memory: 4Gi
+          cpu: 2
+      storage: 30Gi
+      volumeClaimTemplate:
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          resources:
+            requests:
+              storage: 30Gi
+

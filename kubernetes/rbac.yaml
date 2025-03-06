@@ -1,0 +1,27 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: opensearch
+  name: opensearch-operator
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["list", "get", "create", "delete"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["list", "get", "create", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: opensearch-operator-binding
+  namespace: opensearch
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: opensearch
+roleRef:
+  kind: Role
+  name: opensearch-operator
+  apiGroup: rbac.authorization.k8s.io
+

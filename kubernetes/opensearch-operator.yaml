@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opensearch-operator
+  namespace: opensearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opensearch-operator
+  template:
+    metadata:
+      labels:
+        app: opensearch-operator
+    spec:
+      containers:
+        - name: opensearch-operator
+          image: opensearch-project/operator:latest
+
